@@ -1,0 +1,10 @@
+<section class="flex items-center  ">
+    <div class="1/2">
+        <img [src]="CategoryDetails.image" [alt]="CategoryDetails.slug" class="w-[250px]">
+    </div>
+    <div class="1/2 px-4">
+        <h2 class="text-blue-900 text-3xl">{{CategoryDetails.name}}</h2>
+        <h2 class="font-light text-xl">{{CategoryDetails.createdAt |date}}</h2>
+        <h2 class="font-light text-xl ">{{CategoryDetails.updatedAt |date}} </h2>
+    </div>
+</section>

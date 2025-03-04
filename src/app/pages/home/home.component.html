@@ -1,0 +1,94 @@
+<section>
+  <div class="grid Exsm:grid-cols-[70%_minmax(0,1fr)] EXsm:object-cover md:grid-cols-[70%_minmax(0,1fr)]">
+    <owl-carousel-o [options]="customMainOptions">
+      <ng-template carouselSlide>
+        <img src="/images/img1.jpg" class="w-full h-[300px]" alt="" />
+        </ng-template>
+      <ng-template carouselSlide>
+        <img src="/images/img2.jpg" class="w-full h-[300px]" alt="" />
+        </ng-template>
+      <ng-template carouselSlide>
+        <img src="/images/Trade.webp" class="w-full h-[300px]" alt="" />
+        </ng-template>
+      <ng-template carouselSlide>
+        <img src="/images/slider-image-3.jpeg" class="w-full h-[300px]" alt="" />
+        </ng-template>
+      <ng-template carouselSlide>
+        <img src="/images/img5.jpg" class="w-full h-[300px]" alt="" />
+        </ng-template>
+      <ng-template carouselSlide>
+        <img src="/images/img7.jpg" class="w-full h-[300px]" alt="" />
+        </ng-template>
+    </owl-carousel-o>
+
+    <div>
+      <img src="/images/Coffee Machine_.jpg" class="w-full h-[150px]" alt="" />
+      <img src="/images/headPhone.jpg" class="w-full h-[150px]" alt="" />
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2 class="text-4xl py-2 ">Popular Categories</h2>
+  <owl-carousel-o [options]="customOptions">
+    @for (cate of categories; track cate._id) {
+    <ng-template carouselSlide>
+      <!-- content -->
+      <img [src]="cate.image" class="w-full h-[250px]" [alt]="cate.name" />
+      <h3 class="text-blue-900">{{ cate.name }}</h3>
+    </ng-template>
+    }
+  </owl-carousel-o>
+</section>
+
+<section>
+  <h2 class="text-4xl py-2">Popular Products</h2>
+  <input pInputText [(ngModel)]="SearchText" type="text" pSize="large" placeholder="Search Product" 
+  class=" block mx-auto w-1/2 mb-5"/>
+  <div class="grid Exsm:p-5 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-10">
+    @if (products && products.length > 0) {
+      @for (prod of products.slice(0,10) |search : SearchText ; track prod._id) {
+        <div
+          class="card border border-violet-800 rounded-md overflow-hidden shadow relative"
+        >
+          <div  class="bodyCard" [routerLink]="['/details' , prod._id]">
+            <div class="card-img">
+              <img
+                [src]="prod.imageCover"
+                class="w-full h-[250px] object-contain"
+                [alt]="prod.title"
+              />
+            </div>
+            <div class="card-body px-2 py-4">
+                <h4 class="text-blue-900 text-xs">{{ prod.category.name}}</h4> 
+              <h3 class="font-medium">{{ prod.title.split(" ", 2).join(" ") }}</h3>
+              <div class="flex justify-between items-center">
+                <span>{{ prod.price | currency :"EUR" }} </span>
+                <div class="flex items-center">
+                  <i class="fas fa-star text-yellow-500"></i>
+                  <span class="text-gray-700">{{ prod.ratingsAverage }}</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="card flex justify-center gap-2">
+            <p-toast />
+            <button
+            class="bg-[#415a77] text-white py-2 px-10 rounded-md w-[90%] mx-auto block text-xl"
+            (click)="AddProductToCart(prod._id) "[disabled]="IsLoading" 
+          >
+            Add To Cart 
+            @if (IsLoading) {
+              <span class="ms-[5px]"><i class="fas fa-spin fa-spinner"></i></span>
+              }@else {
+                <i class="fa-solid fa-cart-shopping"></i>
+              }
+          </button>
+          </div>
+        </div>
+        }
+    }@else {
+      <p>Loading ......</p>
+    }
+  </div>
+</section>

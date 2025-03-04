@@ -1,0 +1,71 @@
+<section
+  class="Exsm:w-[300px] md:w-[500px] xl:w-[700px] mx-auto bg-gray-100 border rounded shadow-lg p-4"
+>
+  <h1 class="font-light text-3xl text-[#241239] capitalize text-center">
+    CheckOut :
+  </h1>
+  <form [formGroup]="checkOutForm" (ngSubmit)="subimtForm()">
+    <div class="card flex flex-wrap justify-center items-end gap-4 py-3">
+      <div>
+        <p-floatlabel variant="on">
+          @let DetailsControl = checkOutForm.get("details");
+          <textarea
+            formControlName="details" pTextarea id="details" rows="2" cols="30" style="resize: true" class="block Exsm:w-[280px] md:w-[400px] xl:w-[600px] mb-1 py-2 px-4"
+          ></textarea>
+          <label for="details">details</label>
+        </p-floatlabel>
+        @if (DetailsControl?.errors && DetailsControl?.touched) {
+          <p-message severity="error"  >
+            <ul class="md:w-[370px] xl:w-[570px]">
+              @if (DetailsControl?.getError("required")) {
+                <li><i class="fa-solid fa-circle-info"></i> Details Is Required</li>
+              }
+            </ul>
+          </p-message>
+        }
+      </div>
+      <div >
+        <p-floatlabel variant="on">
+          @let PhoneControl = checkOutForm.get("phone");
+          <input formControlName="phone" pInputText type="tel" id="phone" autocomplete="off" class="block Exsm:w-[280px] md:w-[400px] xl:w-[600px] mb-1 py-2 px-4"
+          />
+          <label for="phone">phone</label>
+        </p-floatlabel>
+        @if (PhoneControl?.errors && PhoneControl?.touched) {
+          <p-message severity="error"  >
+            <ul class="md:w-[370px] xl:w-[570px]">
+              @if (PhoneControl?.getError("required")) {
+                <li><i class="fa-solid fa-circle-info"></i> Phone Is Required</li>
+              }
+              @if (PhoneControl?.getError("pattern")) {
+                <li><i class="fa-solid fa-circle-info"></i> Input Egyption Number</li>
+              }
+            </ul>
+          </p-message>
+        }
+      </div>
+      <div class="mb-2">
+        <p-floatlabel variant="on">
+          @let CityControl = checkOutForm.get("city"); 
+          <input formControlName="city" pInputText id="city"  autocomplete="off" class="block Exsm:w-[280px] md:w-[400px] xl:w-[600px] mb-1 py-2 px-4"
+          />
+          <label for="city">city</label>
+        </p-floatlabel>
+        @if (CityControl?.errors && CityControl?.touched) {
+          <p-message severity="error">
+            <ul class="md:w-[370px] xl:w-[570px]">
+              @if (DetailsControl?.getError("required")) {
+                <li><i class="fa-solid fa-circle-info"></i> City Is Required</li>
+              }
+            </ul>
+          </p-message>
+        }
+      </div>
+    </div>
+
+    <button type="submit" [disabled]="checkOutForm.invalid" class="btn-main md:w-[200px] sm:m-auto md:mx-[270px] xl:mx-[430px] block text-[15px] capitalize"
+    > online payment @if (isLoading) {
+      <span><i class="fas fa-spin fa-spinner"></i></span>
+    } </button>
+  </form>
+</section>

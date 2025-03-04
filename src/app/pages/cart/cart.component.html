@@ -1,0 +1,50 @@
+@if (cartDetails.totalCartPrice) {
+  <section class="md:w-[75%] mx-auto bg-gray-100 border rounded shadow-lg p-4">
+    <h1 class="font-light text-3xl text-[#241239] capitalize text-center">
+      Shop Cart
+    </h1>
+    <div class=" flex justify-between items-center px-10 py-5 ">
+      <span class="text-green-900">
+        Total Cart Price : {{ cartDetails.totalCartPrice | currency : "GBP" }}</span>
+      <p-toast />
+      <p-confirmdialog />
+      <p-button (click)="deleteAllCartItems($event)" label="Delete" severity="danger" [outlined]="true" ><i class="fa-solid fa-trash"></i></p-button> 
+    </div>
+
+    @for (prod of cartDetails.products; track prod.product._id) {
+      <div class="grid md:grid-cols-[20%_minmax(0,1fr)] border-b mb-3">
+          <!-- img -->
+          <div>
+              <img [src]="prod.product.imageCover" class="w-full h-[150px] object-contain" [alt]="prod.product.title">
+          </div>
+      
+          <!-- info -->
+          <div class="flex justify-between items-center">
+              <!-- info -->
+              <div>
+                  <h3>Title: {{prod.product.title}}</h3>
+                  <h4>Price : {{prod.price}}</h4>
+                  
+                  <button class="text-green-900" (click)="removeCartItem($event,prod.product._id )"><i class="fas fa-trash-can"></i> Remove </button>
+              </div>
+      
+              <!-- BTN -->
+              <div class="flex items-center gap-4">
+                  <p-toast />
+                  <button class="text-green-900" [disabled]="isLoading" (click)="upadteCount(prod.product._id ,prod.count + 1 ,'add')">
+                    <i class="fa-regular fa-square-plus text-3xl"></i> </button>
+                  <span>{{prod.count}}</span>
+                  <button class="text-green-900" [disabled]="isLoading" (click)="upadteCount(prod.product._id ,prod.count - 1 , 'subtract')">
+                      <i class="fa-regular fa-square-minus text-3xl"></i> </button>
+              </div>
+      
+          </div>
+        </div>
+    }
+    <button class="btn-main capitalize ms-auto block" [routerLink]="['/checkout' , cartDetails._id]">checkOut</button>
+  </section> 
+}
+@else {
+  <h1><img src="/images/NoDataFound.jpg" alt="" class="w-[550px] block mx-auto" ></h1>
+
+}

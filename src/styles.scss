@@ -1,0 +1,43 @@
+/* You can add global styles to this file, and also import other style files */
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+@import 'ngx-owl-carousel-o/lib/styles/scss/owl.carousel';
+@import 'ngx-owl-carousel-o/lib/styles/scss/owl.theme.default';
+
+
+@import 'ngx-toastr/toastr';
+
+
+// LIKE BUTTON ON Rigster
+.btn-main{
+    @apply disabled:bg-orange-950 bg-[#415a77] hover:bg-[#081320] transition-colors duration-500
+     text-white py-2 px-10 rounded-md 
+     
+}
+@font-face {
+    font-family: MainFont;
+    src: url(../public/Font/Lora-VariableFont_wght.ttf);
+    font-weight: 600;
+}
+body{
+font-family: MainFont;
+}
+
+
+
+@media screen  and (max-width:640px){
+
+    .social ,.socialLog{
+        flex-direction: row;
+        width: 100%;
+        justify-content: space-evenly;
+    }
+    
+    .Reuse{
+        flex-wrap: wrap;
+    }
+}
