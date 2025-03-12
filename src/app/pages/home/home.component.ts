@@ -14,6 +14,7 @@ import { CartService } from '../../core/services/cart/cart.service';
 import { MessageService } from 'primeng/api';
 import { Toast } from 'primeng/toast';
 import { ButtonModule } from 'primeng/button';
+import { finalize } from 'rxjs';
 
 
 
@@ -107,16 +108,14 @@ getProductData():void{
 
   AddProductToCart(id:string):void{
     this.IsLoading = true
-    this.cartService.AddProductToCart(id).subscribe({
+    this.cartService.AddProductToCart(id).pipe(finalize(()=>{
+        this.IsLoading = false;  // إعادة تفعيل الزر بعد الانتهاء من العملية
+      })).subscribe({
       next:(res)=>{console.log(res)
         if(res.status === "success"){
           this.showSuccess(res.message)
-          
         }
-      },complete:() => {
-        this.IsLoading = false;  // إعادة تفعيل الزر بعد الانتهاء من العملية
       }
-      
     })
   }
 }

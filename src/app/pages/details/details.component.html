@@ -1,9 +1,43 @@
-<section class="flex items-center  ">
-    <div class="1/4">
-        <img [src]="ProductDetails.imageCover" [alt]="ProductDetails.title" class="w-[250px]">
+<section>
+  <div
+    class="Exsm:flex Exsm:flex-col Exsm:items-center Exsm:text-center md:flex md:items-center"
+  >
+  
+    <div class="md:1/4">
+      <img
+        [src]="ProductDetails.imageCover"
+        [alt]="ProductDetails.title"
+        class="Exsm:w-[200px] md:w-[250px]"
+      />
+
     </div>
-    <div class="3/4 px-4">
-        <h2 class="text-blue-900 text-xl">{{ProductDetails.title}}</h2>
-        <h2 class="font-light">{{ProductDetails.description}}</h2>
+    
+    <div class="md:1/2 md:px-4 Exsm:mb-4 md:flex md:items-center ">
+        <div class="flex gap-5 md:flex-col  Exsm:justify-around Exsm:m-4 me-4 ">
+            @for (img of ProductDetails.images.slice(0,4); track $index) {
+                <button (click)="ChangeImageCoverUrl(ProductDetails , img)"><img [src]="img" class="w-[70px] h-[70px] rounded-full" [alt]="ProductDetails.title"></button>
+            }
+        </div>
+      <div class="ms-7">
+        <h2 class="text-blue-900 text-xl">{{ ProductDetails.title }}</h2>
+        <h2 class="font-light">{{ ProductDetails.description }}</h2>
+      </div>
     </div>
+  </div>
+  
+  
+  <div class="card flex justify-center gap-2">
+    <p-toast />
+    <button
+            class="btn-main Exsm:h-15 Exsm:text-2xl Exsm:m-auto block md:ms-auto md:h-18 md:text-3xl"
+            (click)="BuyProduct()"[disabled]="IsLoading" 
+          >
+            Add To Cart 
+            @if (IsLoading) {
+              <span class="ms-[5px]"><i class="fas fa-spin fa-spinner"></i></span>
+              }@else {
+                <i class="fa-solid fa-cart-shopping"></i>
+              }
+          </button>
+  </div>
 </section>

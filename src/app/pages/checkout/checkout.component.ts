@@ -5,8 +5,9 @@ import { FormsModule } from '@angular/forms';
 import { FloatLabel } from 'primeng/floatlabel';
 import { InputTextModule } from 'primeng/inputtext';
 import { Message } from 'primeng/message';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { OrdersService } from '../../core/services/orders/orders.service';
+import { finalize } from 'rxjs';
 @Component({
   selector: 'app-checkout',
   imports: [ReactiveFormsModule , TextareaModule , FormsModule , FloatLabel ,Message ,InputTextModule ],
@@ -20,6 +21,7 @@ export class CheckoutComponent implements OnInit{
   private readonly formBuilder = inject(FormBuilder)
   private readonly activatedRoute = inject(ActivatedRoute)
   private readonly ordersService = inject(OrdersService)
+  private readonly router = inject(Router)
 
 
   ngOnInit(): void {
@@ -45,17 +47,28 @@ export class CheckoutComponent implements OnInit{
     console.log(this.checkOutForm.value) // {details , city , phone}
     console.log(this.cartId )
     console.log(this.checkOutForm )
-    this.ordersService.checkOutPayMent(this.cartId , this.checkOutForm.value).subscribe({
+    this.ordersService.checkOutPayMent(this.cartId , this.checkOutForm.value).pipe(finalize(()=>{this.isLoading=false})).subscribe({
       next:(res)=>{
         this.isLoading  = true
         console.log(res)
         if(res.status === "success"){
           open(res.session.url, "_self")
         }
-      },error:(err)=>{
-        this.isLoading  = false
-        console.log(err)
       }
     })
   }
+  
+  CheckDeliverySubmit():void{
+    this.ordersService.checkOutPayMent(this.cartId , this.checkOutForm.value).pipe(finalize(()=>{this.isLoading=false})).subscribe({
+      next:(res)=>{
+        this.isLoading  = true
+        console.log(res)
+        if(res.status === "success"){
+          this.router.navigate(['/allorders']);  // IF Click Check Delivery 
+        }
+      }
+    })
+  }
+
 }
+

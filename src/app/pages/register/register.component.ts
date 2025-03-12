@@ -13,7 +13,7 @@ import { PasswordModule } from 'primeng/password';
 import { Message } from 'primeng/message';
 import { AuthService } from '../../core/services/auth/auth.service';
 import { HttpErrorResponse } from '@angular/common/http';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-register',
@@ -24,6 +24,7 @@ import { Router } from '@angular/router';
     FloatLabel,
     PasswordModule,
     Message,
+    RouterLink
   ],
   templateUrl: './register.component.html',
   styleUrl: './register.component.scss',

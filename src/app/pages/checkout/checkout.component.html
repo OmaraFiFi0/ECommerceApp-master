@@ -4,7 +4,7 @@
   <h1 class="font-light text-3xl text-[#241239] capitalize text-center">
     CheckOut :
   </h1>
-  <form [formGroup]="checkOutForm" (ngSubmit)="subimtForm()">
+  <form [formGroup]="checkOutForm" >
     <div class="card flex flex-wrap justify-center items-end gap-4 py-3">
       <div>
         <p-floatlabel variant="on">
@@ -63,9 +63,18 @@
       </div>
     </div>
 
-    <button type="submit" [disabled]="checkOutForm.invalid" class="btn-main md:w-[200px] sm:m-auto md:mx-[270px] xl:mx-[430px] block text-[15px] capitalize"
+    
+    <div class=" md:flex md:gap-3 md:justify-end">
+      <button type="submit" (click)="CheckDeliverySubmit()" [disabled]="checkOutForm.invalid" class="btn-main  Exsm:w-full Exsm:text-xl w-[200px]    block text-[15px] text-nowrap capitalize"
+    > Cash on delivery @if (isLoading) {
+      <span><i class="fas fa-spin fa-spinner"></i></span>
+    } </button>
+      <button type="submit" (click)="subimtForm()" [disabled]="checkOutForm.invalid" class="btn-main Exsm:mt-4 Exsm:w-full Exsm:text-xl w-[200px]    block text-[15px] capitalize"
     > online payment @if (isLoading) {
       <span><i class="fas fa-spin fa-spinner"></i></span>
     } </button>
+    
+    </div>
   </form>
+  
 </section>

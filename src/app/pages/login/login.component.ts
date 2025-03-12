@@ -6,13 +6,12 @@ import { PasswordModule } from 'primeng/password';
 import { Message } from 'primeng/message';
 import { AuthService } from '../../core/services/auth/auth.service';
 import { HttpErrorResponse } from '@angular/common/http';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
-
 
 @Component({
   selector: 'app-login',
-  imports: [ReactiveFormsModule,FormsModule, InputTextModule, FloatLabel ,PasswordModule,Message ],
+  imports: [ReactiveFormsModule,FormsModule, InputTextModule, FloatLabel ,PasswordModule,Message , RouterLink ],
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss'
 })

@@ -5,8 +5,6 @@
     <form [formGroup]="loginForm" (ngSubmit)="SubmitForm()">
       <div class="card flex flex-wrap justify-center items-end gap-4 py-3">
         <!-- Name Field -->
-  
-        
         <p-floatlabel variant="on">
           @let EmailControl = loginForm.get("email");
           <input
@@ -17,19 +15,17 @@
             autocomplete="off"
             class="block Exsm:w-[280px] md:w-[400px] md:py-2 md:px-4"
           />
-          <label for="Email">Email</label>
+        <label for="Email">Email</label>
         </p-floatlabel>
         @if (EmailControl?.errors && EmailControl?.touched) {
         <p-message severity="error"
-          ><ul class="Exsm:w-[200px] md:w-[370px]">
+          ><ul class="Exsm:w-[200px] md:w-[320px]">
             @if (EmailControl?.getError("required")) {
             <li><i class="fa-solid fa-circle-info"></i> Email Is Required</li>
             } @else if (EmailControl?.getError("email")) {
             <li><i class="fa-solid fa-circle-info"></i> Enter Vaild Email</li>
             }
-          </ul></p-message
-        >
-        }
+          </ul></p-message>}
         <p-floatlabel variant="on">
           <!-- [toggleMask]="true"  HOW MAKE IT-->
           @let PasswordControl = loginForm.get("password");
@@ -45,7 +41,7 @@
         </p-floatlabel>
         @if (PasswordControl?.errors && PasswordControl?.touched) {
         <p-message severity="error"
-          ><ul class="Exsm:w-[200px] md:w-[370px]">
+          ><ul class="Exsm:w-[200px] md:w-[320px]">
             @if (PasswordControl?.getError("required")) {
             <li><i class="fa-solid fa-circle-info"></i> password Is Required</li>
             } 
@@ -55,7 +51,7 @@
       </div>
       <button
         type="submit"
-        class="btn-main  md:w-[150px] sm:m-auto md:mx-[300px] block text-[15px] capitalize"
+        class="btn-main Exsm:ms-auto md:w-[150px] sm:m-auto md:mx-[300px] block text-[15px] capitalize"
         [disabled]="isLoading"
       >SginIn @if (isLoading) {
         <span><i class="fas fa-spin fa-spinner"></i></span>
@@ -67,6 +63,18 @@
       @if (isSuccess) {
         <p-message severity="success" class=" block  py-4  md:w-[400px] text-center text-3xl"><i class="fa-solid fa-check"></i>{{isSuccess}}</p-message>
       }
+      <a
+            routerLink="/forgotpassword"
+            class="block py-4 px-3 text-gray-700 rounded-sm text-xl hover:underline text-end" 
+            aria-current="page"
+            >Forgot Password</a
+          >
+      <a
+            routerLink="/register"
+            class="block py-4 px-3 text-gray-700 rounded-sm text-xl hover:underline text-end" 
+            aria-current="page"
+            >SignUp</a
+          >
     </form>
   </section>
   

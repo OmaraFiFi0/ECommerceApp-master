@@ -25,6 +25,27 @@ export const routes: Routes = [
             (m) => m.RegisterComponent
           ),
       },
+      {
+        path: 'forgotpassword',
+        loadComponent: () =>
+          import('./pages/forgotpassword/forgotpassword.component').then(
+            (m) => m.ForgotpasswordComponent
+          ),
+      },
+      {
+        path: 'verifyRestCode',
+        loadComponent: () =>
+          import('./pages/verfiypassword/verfiypassword.component').then(
+            (m) => m.VerfiypasswordComponent
+          ),
+      },
+      {
+        path: 'updatePassword',
+        loadComponent: () =>
+          import('./pages/updatepassword/updatepassword.component').then(
+            (m) => m.UpdatepasswordComponent
+          ),
+      },
     ],
   },
 

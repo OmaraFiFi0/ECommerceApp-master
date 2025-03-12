@@ -1,4 +1,4 @@
-import { Observable } from 'rxjs';
+import { finalize, Observable } from 'rxjs';
 import { Component, inject, OnInit } from '@angular/core';
 import { CartService } from '../../core/services/cart/cart.service';
 import { ICart } from '../../shared/interfaces/icart';
@@ -50,7 +50,7 @@ export class CartComponent implements OnInit {
   
   upadteCount(id:string , count:number , action:string):void{
     this.isLoading=true
-    this.cartService.updateCartProductQuantity(id,count).subscribe({
+    this.cartService.updateCartProductQuantity(id,count).pipe(finalize(()=>{this.isLoading = false; })).subscribe({
       next:(res)=>{console.log(res)
         this.cartDetails = res.data
         if (action === 'add') {
@@ -60,9 +60,7 @@ export class CartComponent implements OnInit {
       }
       this.isLoading = false
       }
-      ,complete:() => {
-        this.isLoading = false;  // إعادة تفعيل الزر بعد الانتهاء من العملية
-      }
+      
     })
   }
 

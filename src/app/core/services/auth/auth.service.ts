@@ -22,6 +22,18 @@ private readonly router = inject(Router)
   SendLoginData(data:string):Observable<any>{
       return this.httpClient.post(`${enviroment.baseUrl}/api/v1/auth/signin`, data)
   }
+  
+  SendEmailData(data:string):Observable<any>{
+    return this.httpClient.post(`${enviroment.baseUrl}/api/v1/auth/forgotPasswords` , data)
+  }
+
+  SendCodeVerfiyPassword(data:string):Observable<any>{
+    return this.httpClient.post(`${enviroment.baseUrl}/api/v1/auth/verifyResetCode` , data)
+  }
+
+  SendResetPassword(data:string):Observable<any>{
+    return this.httpClient.put(`${enviroment.baseUrl}/api/v1/auth/resetPassword` , data)
+  }
 
   saveUserData():void{
     if(localStorage.getItem("userToken")!==null){

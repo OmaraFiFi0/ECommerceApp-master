@@ -62,7 +62,6 @@ AddProductToCart(id:string):void{
         this.showSuccess(res.message)
       }
     }
-    
   })
 }
 

@@ -1,1 +1,39 @@
 <p>allorders works!</p>
+
+
+
+<section>
+    <h2 class="text-4xl py-2 text-center capitalize">all Orders</h2>
+    <div class="flex flex-wrap justify-around   gap-5 ">
+        @for (order of OrdersDetails.slice(0,39); track $index) {
+            <div class="card border border-violet-800 rounded-md overflow-hidden shadow relative text-center w-[32%] h-[300px]">
+                @for (cartitems of order.cartItems; track $index) {
+                    <img [src]="cartitems.product.imageCover" [alt]="cartitems.product.title" class="w-[200px] h-[120px] object-fill mx-auto">
+                    <h2 class="text-2xl text-green-800"> Category Name : {{cartitems.product.category.name}}</h2>
+                    <h2 class="text-xl text-green-800"> Product ID : {{cartitems.product._id}}</h2>
+                    <h2 class="text-xl text-green-800"> Product Title : {{cartitems.product.title}}</h2>
+                    <h2 class="text-xl text-green-800"> Range Avarage {{cartitems.product.ratingsAverage}}</h2>
+                    <h2 class="text-xl text-green-800"> totalOrderPrice : {{order.totalOrderPrice}}</h2>    
+                    <h2 class="text-xl text-green-800"> UserPhone : {{order.user.phone}}</h2>                            
+                }
+                <!-- <h2 class="text-xl text-cyan-500"> Is Delivered  : {{order.isDelivered}}</h2>
+                <h2 class="text-xl text-cyan-600"> paymentMethodType : {{order.paymentMethodType}}</h2>
+                <h2 class="text-xl text-cyan-800"> UserName : {{order.user.name}}</h2>                
+                <h2 class="text-xl text-cyan-900"> UserEmail : {{order.user.email}}</h2>                
+                <h2 class="text-xl text-cyan-950"> UserId : {{order.user._id}}</h2>                 -->
+                
+            </div>
+            
+        }
+        
+    </div>
+    <div class="flex justify-around mt-4">
+        <button  (click)="PrevPage()" class="btn-main">Back</button>
+        <span>{{currentPage}}</span>
+        <button (click)="NextPage()" class="btn-main">Next</button>
+      </div>
+
+    
+    
+
+</section>
