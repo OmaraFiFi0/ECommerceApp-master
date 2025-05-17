@@ -8,6 +8,7 @@ import { Message } from 'primeng/message';
 import { ActivatedRoute, Router } from '@angular/router';
 import { OrdersService } from '../../core/services/orders/orders.service';
 import { finalize } from 'rxjs';
+import { CartService } from '../../core/services/cart/cart.service';
 @Component({
   selector: 'app-checkout',
   imports: [ReactiveFormsModule , TextareaModule , FormsModule , FloatLabel ,Message ,InputTextModule ],
@@ -21,6 +22,7 @@ export class CheckoutComponent implements OnInit{
   private readonly formBuilder = inject(FormBuilder)
   private readonly activatedRoute = inject(ActivatedRoute)
   private readonly ordersService = inject(OrdersService)
+  private readonly cartService = inject(CartService)
   private readonly router = inject(Router)
 
 
@@ -64,6 +66,9 @@ export class CheckoutComponent implements OnInit{
         this.isLoading  = true
         console.log(res)
         if(res.status === "success"){
+          this.cartService.ClearAllCartItems().subscribe({
+            next:(res)=>{console.log(res)}
+          })
           this.router.navigate(['/allorders']);  // IF Click Check Delivery 
         }
       }
