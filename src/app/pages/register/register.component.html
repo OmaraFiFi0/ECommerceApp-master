@@ -55,7 +55,7 @@
           @if (EmailControl?.getError("required")) {
           <li><i class="fa-solid fa-circle-info"></i> Email Is Required</li>
           } @else if (EmailControl?.getError("email")) {
-          <li><i class="fa-solid fa-circle-info"></i> Enter Vaild Email</li>
+          <li><i class="fa-solid fa-circle-info"></i> Enter Valid Email</li>
           }
         </ul></p-message
       >
@@ -79,7 +79,7 @@
           @if (PasswordControl?.getError("required")) {
           <li><i class="fa-solid fa-circle-info"></i> password Is Required</li>
           } @else if (PasswordControl?.getError("pattern")) {
-          <li><i class="fa-solid fa-circle-info"></i> Enter Vaild password</li>
+          <li><i class="fa-solid fa-circle-info"></i> Enter Valid password</li>
           <li><i class="fa-solid fa-circle-info"></i> Password Must Start with Letter And Min Length 8 </li>
           }
         </ul></p-message
@@ -131,7 +131,7 @@
           @if (PhoneControl?.getError("required")) {
           <li><i class="fa-solid fa-circle-info"></i> phone Is Required</li>
           } @else if (PhoneControl?.getError("pattern")) {
-          <li><i class="fa-solid fa-circle-info"></i> Enter Vaild phone</li>
+          <li><i class="fa-solid fa-circle-info"></i> Enter Egyptian Phone Number</li>
           }
         </ul></p-message
       >
